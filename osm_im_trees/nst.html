@@ -1,0 +1,2394 @@
+<head><title> nst 
+</title>
+<style type="text/css" media="all">
+
+body, h1, h2, h3, h4, h5, h6, p, td, table td, input, select {
+        font-family: Verdana, Helvetica, Arial, sans-serif;
+        font-size: 10pt;
+}
+
+body, ol, li, h2 {padding:0; margin: 0;}
+
+ol#root  {padding-left: 5px; margin-top: 2px; margin-bottom: 1px;
+          list-style: none;}
+
+#root ol {padding-left: 5px; margin-top: 2px; margin-bottom: 1px;
+          list-style: none;}
+
+#root li {margin-bottom: 1px; padding-left: 5px;  margin-top: 2px;
+          font-size: x-small;}
+
+.panel   {border-bottom: 1px solid #999; margin-bottom: 2px; margin-top: 2px;
+          background: #eee;}
+
+#root ul {margin-bottom: 1px; margin-top: 2px; list-style-position: inside;}
+
+#root a {text-decoration: none;}
+
+.folder {
+   background:url(data:image/gif;base64,R0lGODlhGgAOALMLAJmZmYuLi3p6ev///+zs7MzMzGZmZqqqqrS0tLq6uuHh4f///wAAAAAAAAAAAAAAACH5BAEAAAsALAAAAAAaAA4AAASJcMlJq714qgROKUtxAABBgJkUFMQwFEhyFoFAKini7idSHwGDQXAYYAADxQdBOjiBQqGgYKx4AomCYoYAHqLRVVUCKCBdSthhCgYDKIDuTpnoGgptgxged3FHBgpgU2MTASsmdCM1gkNFGDVaHx91QQQ3KZGSZocHBCEpEgIrCYdxn6EVAnoIGREAOw==) no-repeat;
+float: left; padding-right: 30px;margin-left: 3px;
+
+}
+
+.doc {
+   background:url(data:image/gif;base64,R0lGODlhDAAOALMJAMzMzODg4P///+np6a+vr+7u7jMzM5mZmYmJif///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAMAA4AAARFEEhyCAEjackPCESwBRxwCKD4BSSACCgxrKyJ3B42sK2FSINgsAa4AApI4W5yFCCTywts+txJp9TC4IrFcruwi2FMLgMiADs=) no-repeat;
+float: left; padding-right: 10px; margin-left: 3px;
+cursor: pointer;
+
+}
+
+.leaf {
+   background:url(data:image/gif;base64,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) no-repeat;
+float: left; padding-right: 10px;margin-left: 3px;
+
+}
+
+.leaf-list {
+   background:url(data:image/gif;base64,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) no-repeat;
+float: left; padding-right: 10px; margin-left: 3px;
+
+}
+
+.action {
+   background:url(data:image/gif;base64,R0lGODlhEAAQALMAAAAAABERETMzM1VVVWZmZnd3d4iIiJmZmaqqqru7u8zMzO7u7v///wAAAAAAAAAAACH5BAkKAA0AIf8LSUNDUkdCRzEwMTL/AAAHqGFwcGwCIAAAbW50clJHQiBYWVogB9kAAgAZAAsAGgALYWNzcEFQUEwAAAAAYXBwbAAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1hcHBsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALZGVzYwAAAQgAAABvZHNjbQAAAXgAAAVsY3BydAAABuQAAAA4d3RwdAAABxwAAAAUclhZWgAABzAAAAAUZ1hZWgAAB0QAAAAUYlhZWgAAB1gAAAAUclRSQwAAB2wAAAAOY2hhZAAAB3wAAAAsYlRSQwAAB2wAAAAOZ1RS/0MAAAdsAAAADmRlc2MAAAAAAAAAFEdlbmVyaWMgUkdCIFByb2ZpbGUAAAAAAAAAAAAAABRHZW5lcmljIFJHQiBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtbHVjAAAAAAAAAB4AAAAMc2tTSwAAACgAAAF4aHJIUgAAACgAAAGgY2FFUwAAACQAAAHIcHRCUgAAACYAAAHsdWtVQQAAACoAAAISZnJGVQAAACgAAAI8emhUVwAAABYAAAJkaXRJVAAAACgAAAJ6bmJOTwAAACYAAAKia29LUgAAABYAAP8CyGNzQ1oAAAAiAAAC3mhlSUwAAAAeAAADAGRlREUAAAAsAAADHmh1SFUAAAAoAAADSnN2U0UAAAAmAAAConpoQ04AAAAWAAADcmphSlAAAAAaAAADiHJvUk8AAAAkAAADomVsR1IAAAAiAAADxnB0UE8AAAAmAAAD6G5sTkwAAAAoAAAEDmVzRVMAAAAmAAAD6HRoVEgAAAAkAAAENnRyVFIAAAAiAAAEWmZpRkkAAAAoAAAEfHBsUEwAAAAsAAAEpHJ1UlUAAAAiAAAE0GFyRUcAAAAmAAAE8mVuVVMAAAAmAAAFGGRhREsAAAAuAAAFPgBWAWEAZQBvAGIAZQD/YwBuAP0AIABSAEcAQgAgAHAAcgBvAGYAaQBsAEcAZQBuAGUAcgBpAQ0AawBpACAAUgBHAEIAIABwAHIAbwBmAGkAbABQAGUAcgBmAGkAbAAgAFIARwBCACAAZwBlAG4A6AByAGkAYwBQAGUAcgBmAGkAbAAgAFIARwBCACAARwBlAG4A6QByAGkAYwBvBBcEMAQzBDAEOwRMBD0EOAQ5ACAEPwRABD4ERAQwBDkEOwAgAFIARwBCAFAAcgBvAGYAaQBsACAAZwDpAG4A6QByAGkAcQB1AGUAIABSAFYAQpAadSgAIABSAEcAQgAggnJfaWPPj/AAUAByAG8AZgBp/wBsAG8AIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAbwBHAGUAbgBlAHIAaQBzAGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsx3y8GAAgAFIARwBCACDVBLhc0wzHfABPAGIAZQBjAG4A/QAgAFIARwBCACAAcAByAG8AZgBpAGwF5AXoBdUF5AXZBdwAIABSAEcAQgAgBdsF3AXcBdkAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbADBAGwAdABhAGwA4QBuAG8AcwAgAFIARwBCACAAcAByAG8AZgBpAGxmbpAaACAAUgBHAEIAIGPPj//wZYdO9k4AgiwAIABSAEcAQgAgMNcw7TDVMKEwpDDrAFAAcgBvAGYAaQBsACAAUgBHAEIAIABnAGUAbgBlAHIAaQBjA5MDtQO9A7kDugPMACADwAPBA78DxgOvA7sAIABSAEcAQgBQAGUAcgBmAGkAbAAgAFIARwBCACAAZwBlAG4A6QByAGkAYwBvAEEAbABnAGUAbQBlAGUAbgAgAFIARwBCAC0AcAByAG8AZgBpAGUAbA5CDhsOIw5EDh8OJQ5MACAAUgBHAEIAIA4XDjEOSA4nDkQOGwBHAGUAbgBlAGwAIABSAEcAQgAgAFAAcgBvAGYAaQBsAGkAWQBsAGX/AGkAbgBlAG4AIABSAEcAQgAtAHAAcgBvAGYAaQBpAGwAaQBVAG4AaQB3AGUAcgBzAGEAbABuAHkAIABwAHIAbwBmAGkAbAAgAFIARwBCBB4EMQRJBDgEOQAgBD8EQAQ+BEQEOAQ7BEwAIABSAEcAQgZFBkQGQQAgBioGOQYxBkoGQQAgAFIARwBCACAGJwZEBjkGJwZFAEcAZQBuAGUAcgBpAGMAIABSAEcAQgAgAFAAcgBvAGYAaQBsAGUARwBlAG4AZQByAGUAbAAgAFIARwBCAC0AYgBlAHMAawByAGkAdgBlAGwAcwBldGV4dAAAAABDb3B5cmlnaHQgMjAwrzcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVogAAAAAAAAdE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGwALAAAAAAQABAAAARDsIFJ62xYDhDY+l+CXJIxBQoxEMdUtNI1KQUVA1nO4XqeAQKebwgUDn+DgPEoUS6PuyfRydQplVXMDpvdSq3U7G0YAQA7) no-repeat;
+float: left; height: 14px; width: 12px; padding-right: 10px; margin-left: 3px;
+
+}
+
+.tier1  {margin-left: 0;     }
+.tier2  {margin-left: 1.5em; }
+.tier3  {margin-left: 3em;   }
+.tier4  {margin-left: 4.5em; }
+.tier5  {margin-left: 6em;   }
+.tier6  {margin-left: 7.5em; }
+.tier7  {margin-left: 9em;   }
+.tier8  {margin-left: 10.5em;}
+.tier9  {margin-left: 12em;  }
+.tier10 {margin-left: 13.5em;}
+.tier11 {margin-left: 15em;  }
+.tier12 {margin-left: 16.5em;}
+
+.level1 {padding-left: 0;    }
+.level2 {padding-left: 1em;  }
+.level3 {padding-left: 2em;  }
+.level4 {padding-left: 3em;  }
+</style>
+
+<script language="javascript1.2">
+function toggleRows(elm) {
+ var rows = document.getElementsByTagName("TR");
+ elm.style.backgroundImage = "url(data:image/gif;base64,R0lGODlhGgAOALMLAJmZmYuLi3p6ev///+zs7MzMzGZmZqqqqrS0tLq6uuHh4f///wAAAAAAAAAAAAAAACH5BAEAAAsALAAAAAAaAA4AAASJcMlJq714qgROKUtxAABBgJkUFMQwFEhyFoFAKini7idSHwGDQXAYYAADxQdBOjiBQqGgYKx4AomCYoYAHqLRVVUCKCBdSthhCgYDKIDuTpnoGgptgxged3FHBgpgU2MTASsmdCM1gkNFGDVaHx91QQQ3KZGSZocHBCEpEgIrCYdxn6EVAnoIGREAOw==)";
+ var newDisplay = "none";
+ var thisID = elm.parentNode.parentNode.parentNode.id + "-";
+ // Are we expanding or contracting? If the first child is hidden, we expand
+  for (var i = 0; i < rows.length; i++) {
+   var r = rows[i];
+   if (matchStart(r.id, thisID, true)) {
+    if (r.style.display == "none") {
+     if (document.all) newDisplay = "block"; //IE4+ specific code
+     else newDisplay = "table-row"; //Netscape and Mozilla
+     elm.style.backgroundImage = "url(data:image/gif;base64,R0lGODlhGgAOALMLAJmZmYqKiv///+zs7MzMzGZmZrOzs7q6uqqqqnZ2duHh4f///wAAAAAAAAAAAAAAACH5BAEAAAsALAAAAAAaAA4AAASScMlJq714qgMMIQuBAMAwZBRADIJAGMfwBQE6GW0uGzRS2wuAQPHhABAIAyBAABSe0IJKgiAEDgSF7OVDBKNQwEQlbBG5CZAiAA4oxsoc8WBAFEALe9SQ6rS2dU5vCwJsTwECKUwmcyMBCYMhUHgTj1kfRTwFJxKFBYgVlpdNNCUVBHcWCUwHpQacFgJCqp98GBEAOw==)";
+    }
+    break;
+   }
+ }
+
+ // When expanding, only expand one level.  Collapse all desendants.
+ var matchDirectChildrenOnly = (newDisplay != "none");
+
+ for (var j = 0; j < rows.length; j++) {
+   var s = rows[j];
+   if (matchStart(s.id, thisID, matchDirectChildrenOnly)) {
+     s.style.display = newDisplay;
+     var cell = s.getElementsByTagName("TD")[0];
+     var tier = cell.getElementsByTagName("DIV")[0];
+     var folder = tier.getElementsByTagName("A")[0];
+     if (folder.getAttribute("onclick") != null) {
+     folder.style.backgroundImage = "url(data:image/gif;base64,R0lGODlhGgAOALMLAJmZmYuLi3p6ev///+zs7MzMzGZmZqqqqrS0tLq6uuHh4f///wAAAAAAAAAAAAAAACH5BAEAAAsALAAAAAAaAA4AAASJcMlJq714qgROKUtxAABBgJkUFMQwFEhyFoFAKini7idSHwGDQXAYYAADxQdBOjiBQqGgYKx4AomCYoYAHqLRVVUCKCBdSthhCgYDKIDuTpnoGgptgxged3FHBgpgU2MTASsmdCM1gkNFGDVaHx91QQQ3KZGSZocHBCEpEgIrCYdxn6EVAnoIGREAOw==)";
+     }
+   }
+ }
+}
+
+function matchStart(target, pattern, matchDirectChildrenOnly) {
+ var pos = target.indexOf(pattern);
+ if (pos != 0)
+    return false;
+ if (!matchDirectChildrenOnly)
+    return true;
+ if (target.slice(pos + pattern.length, target.length).indexOf("-") >= 0)
+    return false;
+ return true;
+}
+
+function collapseAllRows() {
+ var rows = document.getElementsByTagName("TR");
+ for (var i = 0; i < rows.length; i++) {
+   var r = rows[i];
+   if (r.id.indexOf("-") >= 0) {
+     r.style.display = "none";
+   }
+ }
+}
+
+function expandAllRows() {
+  var rows = document.getElementsByTagName("TR");
+  for (var i = 0; i < rows.length; i ++) {
+    var r = rows[i];
+    if (r.id.indexOf("-") >= 0) {
+      r.style.display = "table-row";
+    }
+  }
+}
+</script>
+
+<body onload="collapseAllRows();">
+<a href="http://osm.etsi.org">
+   <img src="https://osm.etsi.org/images/OSM-logo.png" width="175" height="60" />
+</a>
+<div class="app">
+<div style="background: #eee; border: dashed 1px #000;">
+<h1> Module: <font color=blue>nst</font>, Namespace:
+                     <font color=blue>urn:etsi:osm:yang:nst</font>, Prefix:
+                     <font color=blue>nst</font></h1> 
+
+ <table width="100%">
+
+ <tr>
+  <!-- specifing one or more widths keeps columns
+       constant despite changes in visible content -->
+  <th align=left>
+     Element
+     <a href='#' onclick='expandAllRows();'>[+]Expand all</a>
+     <a href='#' onclick='collapseAllRows();'>[-]Collapse all</a>
+  </th>
+  <th align=left>Schema</th>
+  <th align=left>Type</th>
+  <th align=left>Flags</th>
+  <th align=left>Opts</th>
+  <th align=left>Status</th>
+  <th align=left>Path</th>
+</tr>
+<tr id="1" class="a">
+                         <td id="p1">
+                            <div id="p2" class="tier1">
+                               <a href="#" id="p3"
+                                  onclick="toggleRows(this);return false;"
+                                  class="folder">&nbsp;
+                               </a>
+                               <font color=blue>nst</font>
+                            </div>
+                         </td> 
+<td>module</td><td></td><td></td><td></td><td>
+                        </td></tr>
+
+        <tr id="1-1" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier2">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">nst[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst</td>
+        </tr>
+        <tr id="1-1-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier3>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:id</td>
+        </tr>
+        <tr id="1-1-2" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier3>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  name </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:name</td>
+        </tr>
+        <tr id="1-1-3" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier3">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">SNSSAI-identifier</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:SNSSAI-identifier</td>
+        </tr>
+        <tr id="1-1-3-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Network slice service type ">  slice-service-type </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="network-slice-type
+enumeration
+ : {eMBB,URLLC,mMTC,}">network-slice-type</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:SNSSAI-identifier/nst:slice-service-type</td>
+        </tr>
+        <tr id="1-1-3-2" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Network slice differentiator"> <em> slice-differentiator </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:SNSSAI-identifier/nst:slice-differentiator</td>
+        </tr>
+        <tr id="1-1-4" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier3">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">quality-of-service</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service</td>
+        </tr>
+        <tr id="1-1-4-3" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Quality of service identifier">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint16
+">uint16</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service/nst:id</td>
+        </tr>
+        <tr id="1-1-4-4" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Quality of service resource type"> <em> resource-type </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="resource-type
+enumeration
+ : {delay-critical-GBR,GBR,non-GBR,}">resource-type</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service/nst:resource-type</td>
+        </tr>
+        <tr id="1-1-4-5" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Priority level of the service"> <em> priority-level </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint16
+">uint16</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service/nst:priority-level</td>
+        </tr>
+        <tr id="1-1-4-6" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Packet delay budget in miliseconds (ms)"> <em> packet-delay-budget </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint16
+">uint16</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service/nst:packet-delay-budget</td>
+        </tr>
+        <tr id="1-1-4-7" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Packet error rate (PER) given in powers of ten"> <em> packet-error-rate </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint16
+">uint16</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service/nst:packet-error-rate</td>
+        </tr>
+        <tr id="1-1-4-8" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Maximum data burst given in bytes (B)"> <em> default-max-data-burst </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint16
+">uint16</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:quality-of-service/nst:default-max-data-burst</td>
+        </tr>
+        <tr id="1-1-5" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier3">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">netslice-subnet[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet</td>
+        </tr>
+        <tr id="1-1-5-9" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Identifier or name for the netslice-subnet in NST scope.">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+ {length = 1..63}">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:id</td>
+        </tr>
+        <tr id="1-1-5-10" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Description of the NSD."> <em> description </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:description</td>
+        </tr>
+        <tr id="1-1-5-11" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="NSS is shared between NS"> <em> is-shared-nss </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="boolean
+">boolean</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:is-shared-nss</td>
+        </tr>
+        <tr id="1-1-5-12" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Reference to catalog NSD">  nsd-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:nsd-ref</td>
+        </tr>
+        <tr id="1-1-5-13" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier4">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">instantiation-parameters</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters</td>
+        </tr>
+        <tr id="1-1-5-13-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  vimAccountId </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vimAccountId</td>
+        </tr>
+        <tr id="1-1-5-13-2" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> ssh_keys </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:ssh_keys</td>
+        </tr>
+        <tr id="1-1-5-13-3" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier5">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">vnf[member-vnf-index]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf</td>
+        </tr>
+        <tr id="1-1-5-13-3-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  member-vnf-index </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:member-vnf-index</td>
+        </tr>
+        <tr id="1-1-5-13-3-2" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> vimAccountId </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vimAccountId</td>
+        </tr>
+        <tr id="1-1-5-13-3-3" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier6">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">vdu[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:id</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-2" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier7">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">volume[name]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:volume</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-2-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  name </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:volume/nst:name</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-2-2" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  vim-volume-id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:volume/nst:vim-volume-id</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-3" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier7">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">interface[name]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:interface</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-3-3" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  name </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:interface/nst:name</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-3-4" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> ip-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:interface/nst:ip-address</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-3-5" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> mac-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="ietf-yang:mac-address
+string
+ {pattern = [0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}}">ietf-yang:mac-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:interface/nst:mac-address</td>
+        </tr>
+        <tr id="1-1-5-13-3-3-3-6" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> floating-ip-required </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="boolean
+">boolean</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:vdu/nst:interface/nst:floating-ip-required</td>
+        </tr>
+        <tr id="1-1-5-13-3-4" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier6">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">internal-vld[name]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-4" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  name </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:name</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-5" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> vim-network-name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:vim-network-name</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier7">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">ip-profile</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-7" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> ip-version </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-version
+enumeration
+ : {unknown,ipv4,ipv6,}">inet:ip-version</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:ip-version</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-8" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> subnet-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-prefix
+union
+{inet:ipv4-prefix, inet:ipv6-prefix}">inet:ip-prefix</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:subnet-address</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-9" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> gateway-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:gateway-address</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-10" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier8">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">dns-server[address]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:dns-server</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-10-1" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier9>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  address </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:dns-server/nst:address</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-11" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier8">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">dhcp-params</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:dhcp-params</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-11-2" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier9>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> enabled </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="boolean
+">boolean</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:dhcp-params/nst:enabled</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-11-3" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier9>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> count </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint8
+">uint8</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:dhcp-params/nst:count</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-6-11-4" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier9>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> start-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:ip-profile/nst:dhcp-params/nst:start-address</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-7" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier7">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">internal-connection-point[id-ref]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:internal-connection-point</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-7-12" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  id-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:internal-connection-point/nst:id-ref</td>
+        </tr>
+        <tr id="1-1-5-13-3-4-7-13" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> ip-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vnf/nst:internal-vld/nst:internal-connection-point/nst:ip-address</td>
+        </tr>
+        <tr id="1-1-5-13-4" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier5">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">vld[name]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld</td>
+        </tr>
+        <tr id="1-1-5-13-4-5" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  name </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:name</td>
+        </tr>
+        <tr id="1-1-5-13-4-6" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> vim-network-name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:vim-network-name</td>
+        </tr>
+        <tr id="1-1-5-13-4-7" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier6">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">ip-profile</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-8" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> ip-version </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-version
+enumeration
+ : {unknown,ipv4,ipv6,}">inet:ip-version</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:ip-version</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-9" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> subnet-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-prefix
+union
+{inet:ipv4-prefix, inet:ipv6-prefix}">inet:ip-prefix</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:subnet-address</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-10" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> gateway-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:gateway-address</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-11" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier7">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">dns-server[address]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:dns-server</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-11-14" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  address </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:dns-server/nst:address</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-12" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier7">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">dhcp-params</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:dhcp-params</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-12-15" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> enabled </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="boolean
+">boolean</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:dhcp-params/nst:enabled</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-12-16" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> count </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint8
+">uint8</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:dhcp-params/nst:count</td>
+        </tr>
+        <tr id="1-1-5-13-4-7-12-17" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier8>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> start-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:ip-profile/nst:dhcp-params/nst:start-address</td>
+        </tr>
+        <tr id="1-1-5-13-4-8" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier6">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">vnfd-connection-point-ref[member-vnf-index-ref vnfd-connection-point-ref]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:vnfd-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-5-13-4-8-13" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  member-vnf-index-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:constituent-vnfd/nsd:member-vnf-index">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:vnfd-connection-point-ref/nst:member-vnf-index-ref</td>
+        </tr>
+        <tr id="1-1-5-13-4-8-14" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description">  vnfd-connection-point-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /vnfd:vnfd-catalog/vnfd:vnfd/vnfd:connection-point/vnfd:name">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:vnfd-connection-point-ref/nst:vnfd-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-5-13-4-8-15" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier7>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> ip-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-subnet/nst:instantiation-parameters/nst:vld/nst:vnfd-connection-point-ref/nst:ip-address</td>
+        </tr>
+        <tr id="1-1-6" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier3">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">netslice-connection-point[name]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point</td>
+        </tr>
+        <tr id="1-1-6-14" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Name of the connection point.">  name </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:name</td>
+        </tr>
+        <tr id="1-1-6-15" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Boolean parameter to indicate whether the CP must be exposed.
+A public IP address will be allocated to this CP if exposed is true.
+The default is false meaning a floating IP address is not required.
+It must be explicitly asked for a floating IP address to be allocated."> <em> floating-ip-required </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="boolean
+">boolean</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:floating-ip-required</td>
+        </tr>
+        <tr id="1-1-6-16" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier4">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="Logical connection of the CP to a NSVLD or to a NSD CP">(connection)</abbr>
+              </div>
+            </td>
+        <td nowrap>choice</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td>Choice</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:connection</td>
+        </tr>
+        <tr id="1-1-6-16-5" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier5">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">:(netslice-vld-ref)</abbr>
+              </div>
+            </td>
+        <td nowrap>case</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:connection</td>
+        </tr>
+        <tr id="1-1-6-16-5-9" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="ID reference to a NSVLD in the NS"> <em> netslice-vld-id-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : ../../netslice-vld/id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:connection/nst:netslice-vld-id-ref</td>
+        </tr>
+        <tr id="1-1-6-16-6" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier5">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">:(nsd-connection-point-ref)</abbr>
+              </div>
+            </td>
+        <td nowrap>case</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:connection</td>
+        </tr>
+        <tr id="1-1-6-16-6-10" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="A reference to a nsd."> <em> nsd-id-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:connection/nst:nsd-id-ref</td>
+        </tr>
+        <tr id="1-1-6-16-6-11" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title=""> <em> nsd-connection-point-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:connection-point/nsd:name">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-connection-point/nst:connection/nst:nsd-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-7" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier3">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">netslice-vld[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld</td>
+        </tr>
+        <tr id="1-1-7-17" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Identifier for the VLD.">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:id</td>
+        </tr>
+        <tr id="1-1-7-18" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Virtual Link Descriptor (VLD) name."> <em> name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:name</td>
+        </tr>
+        <tr id="1-1-7-19" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Short name to appear as label in the UI"> <em> short-name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:short-name</td>
+        </tr>
+        <tr id="1-1-7-20" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Provider of the VLD."> <em> vendor </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:vendor</td>
+        </tr>
+        <tr id="1-1-7-21" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Description of the VLD."> <em> description </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:description</td>
+        </tr>
+        <tr id="1-1-7-22" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Version of the VLD"> <em> version </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:version</td>
+        </tr>
+        <tr id="1-1-7-23" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> type </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="manotypes:virtual-link-type
+enumeration
+ : {ELAN,ELINE,L3,}">manotypes:virtual-link-type</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:type</td>
+        </tr>
+        <tr id="1-1-7-24" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="For ELAN this is the aggregate bandwidth."> <em> root-bandwidth </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint64
+">uint64</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:root-bandwidth</td>
+        </tr>
+        <tr id="1-1-7-25" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="For ELAN this is the bandwidth of branches."> <em> leaf-bandwidth </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint64
+">uint64</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:leaf-bandwidth</td>
+        </tr>
+        <tr id="1-1-7-26" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier4">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="Container for the provider network.">provider-network</abbr>
+              </div>
+            </td>
+        <td nowrap>container</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:provider-network</td>
+        </tr>
+        <tr id="1-1-7-26-7" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Name of the physical network on which the provider
+network is built."> <em> physical-network </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:provider-network/nst:physical-network</td>
+        </tr>
+        <tr id="1-1-7-26-8" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="ID of segregated virtual networks"> <em> segmentation_id </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint32
+">uint32</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:provider-network/nst:segmentation_id</td>
+        </tr>
+        <tr id="1-1-7-27" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Flag indicating whether this network is a VIM management network"> <em> mgmt-network </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="boolean
+">boolean</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:mgmt-network</td>
+        </tr>
+        <tr id="1-1-7-28" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier4">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="A list of references to connection points.">nss-connection-point-ref[nss-ref nsd-connection-point-ref]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:nss-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-7-28-9" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Reference to nsd">  nss-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nst:nst/nst:netslice-subnet/nst:id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:nss-connection-point-ref/nst:nss-ref</td>
+        </tr>
+        <tr id="1-1-7-28-10" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="A reference to a connection point name">  nsd-connection-point-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:connection-point/nsd:name">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:nss-connection-point-ref/nst:nsd-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-7-28-11" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="IP address of the connection point"> <em> ip-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslice-vld/nst:nss-connection-point-ref/nst:ip-address</td>
+        </tr>
+        <tr id="1-1-8" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier3">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="No description">netslicefgd[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd</td>
+        </tr>
+        <tr id="1-1-8-29" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Identifier for the FGD.">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:id</td>
+        </tr>
+        <tr id="1-1-8-30" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="FGD name."> <em> name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:name</td>
+        </tr>
+        <tr id="1-1-8-31" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Short name to appear as label in the UI"> <em> short-name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:short-name</td>
+        </tr>
+        <tr id="1-1-8-32" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Provider of the FGD."> <em> vendor </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:vendor</td>
+        </tr>
+        <tr id="1-1-8-33" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Description of the FGD."> <em> description </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:description</td>
+        </tr>
+        <tr id="1-1-8-34" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier4>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Version of the FGD"> <em> version </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:version</td>
+        </tr>
+        <tr id="1-1-8-35" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier4">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="List of Rendered Service Paths (RSP).">rsp[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp</td>
+        </tr>
+        <tr id="1-1-8-35-12" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Identifier for the RSP.">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp/nst:id</td>
+        </tr>
+        <tr id="1-1-8-35-13" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="RSP name."> <em> name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp/nst:name</td>
+        </tr>
+        <tr id="1-1-8-35-14" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier5">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="A list of references to connection points.">nsd-connection-point-ref[nsd-ref]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp/nst:nsd-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-8-35-14-12" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Reference to member-vnf within constituent-vnfds">  nsd-ref </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp/nst:nsd-connection-point-ref/nst:nsd-ref</td>
+        </tr>
+        <tr id="1-1-8-35-14-13" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="A number that denotes the order of a NSD in a chain"> <em> order </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint8
+">uint8</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp/nst:nsd-connection-point-ref/nst:order</td>
+        </tr>
+        <tr id="1-1-8-35-14-14" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> nsd-connection-point-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:connection-point/nsd:name">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:rsp/nst:nsd-connection-point-ref/nst:nsd-connection-point-ref</td>
+        </tr>
+        <tr id="1-1-8-36" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier4">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="List of classifier rules.">classifier[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier</td>
+        </tr>
+        <tr id="1-1-8-36-15" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Identifier for the classifier rule.">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:id</td>
+        </tr>
+        <tr id="1-1-8-36-16" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Name of the classifier."> <em> name </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:name</td>
+        </tr>
+        <tr id="1-1-8-36-17" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="A reference to the RSP."> <em> rsp-id-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : ../../rsp/id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:rsp-id-ref</td>
+        </tr>
+        <tr id="1-1-8-36-18" class="a">
+        
+            <td nowrap id="p4000">
+               <div id="p5000" class="tier5">
+                 <a href="#" id="p6000"
+                    onclick="toggleRows(this);return false"
+                    class="folder">&nbsp;
+                 </a>
+                 <abbr title="List of match attributes.">match-attributes[id]</abbr>
+              </div>
+            </td>
+        <td nowrap>list</td>
+        <td nowrap></td>
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes</td>
+        </tr>
+        <tr id="1-1-8-36-18-15" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Identifier for the classifier match attribute rule.">  id </abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="string
+">string</abbr></td>
+                
+        <td nowrap>config</td>
+        <td></td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes/nst:id</td>
+        </tr>
+        <tr id="1-1-8-36-18-16" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="IP Protocol."> <em> ip-proto </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="uint8
+">uint8</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes/nst:ip-proto</td>
+        </tr>
+        <tr id="1-1-8-36-18-17" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Source IP address."> <em> source-ip-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes/nst:source-ip-address</td>
+        </tr>
+        <tr id="1-1-8-36-18-18" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Destination IP address."> <em> destination-ip-address </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:ip-address
+union
+{inet:ipv4-address, inet:ipv6-address}">inet:ip-address</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes/nst:destination-ip-address</td>
+        </tr>
+        <tr id="1-1-8-36-18-19" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Source port number."> <em> source-port </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:port-number
+uint16
+ [0..65535]">inet:port-number</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes/nst:source-port</td>
+        </tr>
+        <tr id="1-1-8-36-18-20" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier6>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="Destination port number."> <em> destination-port </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="inet:port-number
+uint16
+ [0..65535]">inet:port-number</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:match-attributes/nst:destination-port</td>
+        </tr>
+        <tr id="1-1-8-36-19" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> nsd-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:id">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:nsd-ref</td>
+        </tr>
+        <tr id="1-1-8-36-20" class="a">
+        
+            <td nowrap>
+               <div id=9999 class=tier5>
+                  <a class="leaf">&nbsp;</a>
+                  <attr title="No description"> <em> nsd-connection-point-ref </em></abbr>
+            
+               </div>
+            </td> 
+        <td nowrap>leaf</td>
+        <td nowrap><abbr title="leafref
+ : /nsd:nsd-catalog/nsd:nsd/nsd:connection-point/nsd:name">leafref</abbr></td>
+                
+        <td nowrap>config</td>
+        <td>?</td>
+        <td>current</td>
+        <td nowrap>/nst:nst/nst:netslicefgd/nst:classifier/nst:nsd-connection-point-ref</td>
+        </tr>
+</table>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,202 @@
+module: nsi
+  +--rw nsi* [id]
+     +--rw id                          yang:uuid
+     +--rw name                        string
+     +--rw short-name?                 string
+     +--rw description?                string
+     +--rw nst-ref                     -> /nst:nst/id
+     +--rw instantiation-parameters
+     |  +--rw vimAccountId       string
+     |  +--rw ssh_keys?          string
+     |  +--rw netslice-subnet* [id]
+     |  |  +--rw id              string
+     |  |  +--rw vimAccountId    string
+     |  |  +--rw ssh_keys?       string
+     |  |  +--rw vnf* [member-vnf-index]
+     |  |  |  +--rw member-vnf-index    string
+     |  |  |  +--rw vimAccountId?       string
+     |  |  |  +--rw vdu* [id]
+     |  |  |  |  +--rw id           string
+     |  |  |  |  +--rw volume* [name]
+     |  |  |  |  |  +--rw name             string
+     |  |  |  |  |  +--rw vim-volume-id    string
+     |  |  |  |  +--rw interface* [name]
+     |  |  |  |     +--rw name                    string
+     |  |  |  |     +--rw ip-address?             inet:ip-address
+     |  |  |  |     +--rw mac-address?            ietf-yang:mac-address
+     |  |  |  |     +--rw floating-ip-required?   boolean
+     |  |  |  +--rw internal-vld* [name]
+     |  |  |     +--rw name                         string
+     |  |  |     +--rw vim-network-name?            string
+     |  |  |     +--rw ip-profile
+     |  |  |     |  +--rw ip-version?        inet:ip-version
+     |  |  |     |  +--rw subnet-address?    inet:ip-prefix
+     |  |  |     |  +--rw gateway-address?   inet:ip-address
+     |  |  |     |  +--rw dns-server* [address]
+     |  |  |     |  |  +--rw address    inet:ip-address
+     |  |  |     |  +--rw dhcp-params
+     |  |  |     |     +--rw enabled?         boolean
+     |  |  |     |     +--rw count?           uint8
+     |  |  |     |     +--rw start-address?   inet:ip-address
+     |  |  |     +--rw internal-connection-point* [id-ref]
+     |  |  |        +--rw id-ref        string
+     |  |  |        +--rw ip-address?   inet:ip-address
+     |  |  +--rw vld* [name]
+     |  |     +--rw name                         string
+     |  |     +--rw vim-network-name?            string
+     |  |     +--rw ip-profile
+     |  |     |  +--rw ip-version?        inet:ip-version
+     |  |     |  +--rw subnet-address?    inet:ip-prefix
+     |  |     |  +--rw gateway-address?   inet:ip-address
+     |  |     |  +--rw dns-server* [address]
+     |  |     |  |  +--rw address    inet:ip-address
+     |  |     |  +--rw dhcp-params
+     |  |     |     +--rw enabled?         boolean
+     |  |     |     +--rw count?           uint8
+     |  |     |     +--rw start-address?   inet:ip-address
+     |  |     +--rw vnfd-connection-point-ref* [member-vnf-index-ref vnfd-connection-point-ref]
+     |  |        +--rw member-vnf-index-ref         -> /nsd:nsd-catalog/nsd/constituent-vnfd/member-vnf-index
+     |  |        +--rw vnfd-connection-point-ref    -> /vnfd:vnfd-catalog/vnfd/connection-point/name
+     |  |        +--rw ip-address?                  inet:ip-address
+     |  +--rw netslice-vld* [name]
+     |     +--rw name                        string
+     |     +--rw vim-network-name?           string
+     |     +--rw ip-profile
+     |     |  +--rw ip-version?        inet:ip-version
+     |     |  +--rw subnet-address?    inet:ip-prefix
+     |     |  +--rw gateway-address?   inet:ip-address
+     |     |  +--rw dns-server* [address]
+     |     |  |  +--rw address    inet:ip-address
+     |     |  +--rw dhcp-params
+     |     |     +--rw enabled?         boolean
+     |     |     +--rw count?           uint8
+     |     |     +--rw start-address?   inet:ip-address
+     |     +--rw nss-connection-point-ref* [nss-ref nsd-connection-point-ref]
+     |        +--rw nss-ref                     -> /nst:nst/netslice-subnet/id
+     |        +--rw nsd-connection-point-ref    -> /nsd:nsd-catalog/nsd/connection-point/name
+     |        +--rw ip-address?                 inet:ip-address
+     +--rw network-slice-template
+     |  +--rw id                           string
+     |  +--rw name                         string
+     |  +--rw SNSSAI-identifier
+     |  |  +--rw slice-service-type      network-slice-type
+     |  |  +--rw slice-differentiator?   string
+     |  +--rw quality-of-service
+     |  |  +--rw id                        uint16
+     |  |  +--rw resource-type?            resource-type
+     |  |  +--rw priority-level?           uint16
+     |  |  +--rw packet-delay-budget?      uint16
+     |  |  +--rw packet-error-rate?        uint16
+     |  |  +--rw default-max-data-burst?   uint16
+     |  +--rw netslice-subnet* [id]
+     |  |  +--rw id                          string
+     |  |  +--rw description?                string
+     |  |  +--rw is-shared-nss?              boolean
+     |  |  +--rw nsd-ref                     -> /nsd:nsd-catalog/nsd/id
+     |  |  +--rw instantiation-parameters
+     |  |     +--rw vimAccountId    string
+     |  |     +--rw ssh_keys?       string
+     |  |     +--rw vnf* [member-vnf-index]
+     |  |     |  +--rw member-vnf-index    string
+     |  |     |  +--rw vimAccountId?       string
+     |  |     |  +--rw vdu* [id]
+     |  |     |  |  +--rw id           string
+     |  |     |  |  +--rw volume* [name]
+     |  |     |  |  |  +--rw name             string
+     |  |     |  |  |  +--rw vim-volume-id    string
+     |  |     |  |  +--rw interface* [name]
+     |  |     |  |     +--rw name                    string
+     |  |     |  |     +--rw ip-address?             inet:ip-address
+     |  |     |  |     +--rw mac-address?            ietf-yang:mac-address
+     |  |     |  |     +--rw floating-ip-required?   boolean
+     |  |     |  +--rw internal-vld* [name]
+     |  |     |     +--rw name                         string
+     |  |     |     +--rw vim-network-name?            string
+     |  |     |     +--rw ip-profile
+     |  |     |     |  +--rw ip-version?        inet:ip-version
+     |  |     |     |  +--rw subnet-address?    inet:ip-prefix
+     |  |     |     |  +--rw gateway-address?   inet:ip-address
+     |  |     |     |  +--rw dns-server* [address]
+     |  |     |     |  |  +--rw address    inet:ip-address
+     |  |     |     |  +--rw dhcp-params
+     |  |     |     |     +--rw enabled?         boolean
+     |  |     |     |     +--rw count?           uint8
+     |  |     |     |     +--rw start-address?   inet:ip-address
+     |  |     |     +--rw internal-connection-point* [id-ref]
+     |  |     |        +--rw id-ref        string
+     |  |     |        +--rw ip-address?   inet:ip-address
+     |  |     +--rw vld* [name]
+     |  |        +--rw name                         string
+     |  |        +--rw vim-network-name?            string
+     |  |        +--rw ip-profile
+     |  |        |  +--rw ip-version?        inet:ip-version
+     |  |        |  +--rw subnet-address?    inet:ip-prefix
+     |  |        |  +--rw gateway-address?   inet:ip-address
+     |  |        |  +--rw dns-server* [address]
+     |  |        |  |  +--rw address    inet:ip-address
+     |  |        |  +--rw dhcp-params
+     |  |        |     +--rw enabled?         boolean
+     |  |        |     +--rw count?           uint8
+     |  |        |     +--rw start-address?   inet:ip-address
+     |  |        +--rw vnfd-connection-point-ref* [member-vnf-index-ref vnfd-connection-point-ref]
+     |  |           +--rw member-vnf-index-ref         -> /nsd:nsd-catalog/nsd/constituent-vnfd/member-vnf-index
+     |  |           +--rw vnfd-connection-point-ref    -> /vnfd:vnfd-catalog/vnfd/connection-point/name
+     |  |           +--rw ip-address?                  inet:ip-address
+     |  +--rw netslice-connection-point* [name]
+     |  |  +--rw name                              string
+     |  |  +--rw floating-ip-required?             boolean
+     |  |  +--rw (connection)?
+     |  |     +--:(netslice-vld-ref)
+     |  |     |  +--rw netslice-vld-id-ref?        -> ../../netslice-vld/id
+     |  |     +--:(nsd-connection-point-ref)
+     |  |        +--rw nsd-id-ref?                 -> /nsd:nsd-catalog/nsd/id
+     |  |        +--rw nsd-connection-point-ref?   -> /nsd:nsd-catalog/nsd/connection-point/name
+     |  +--rw netslice-vld* [id]
+     |  |  +--rw id                          string
+     |  |  +--rw name?                       string
+     |  |  +--rw short-name?                 string
+     |  |  +--rw vendor?                     string
+     |  |  +--rw description?                string
+     |  |  +--rw version?                    string
+     |  |  +--rw type?                       manotypes:virtual-link-type
+     |  |  +--rw root-bandwidth?             uint64
+     |  |  +--rw leaf-bandwidth?             uint64
+     |  |  +--rw provider-network
+     |  |  |  +--rw physical-network?   string
+     |  |  |  +--rw segmentation_id?    uint32
+     |  |  +--rw mgmt-network?               boolean
+     |  |  +--rw nss-connection-point-ref* [nss-ref nsd-connection-point-ref]
+     |  |     +--rw nss-ref                     -> /nst:nst/netslice-subnet/id
+     |  |     +--rw nsd-connection-point-ref    -> /nsd:nsd-catalog/nsd/connection-point/name
+     |  |     +--rw ip-address?                 inet:ip-address
+     |  +--rw netslicefgd* [id]
+     |     +--rw id             string
+     |     +--rw name?          string
+     |     +--rw short-name?    string
+     |     +--rw vendor?        string
+     |     +--rw description?   string
+     |     +--rw version?       string
+     |     +--rw rsp* [id]
+     |     |  +--rw id                          string
+     |     |  +--rw name?                       string
+     |     |  +--rw nsd-connection-point-ref* [nsd-ref]
+     |     |     +--rw nsd-ref                     -> /nsd:nsd-catalog/nsd/id
+     |     |     +--rw order?                      uint8
+     |     |     +--rw nsd-connection-point-ref?   -> /nsd:nsd-catalog/nsd/connection-point/name
+     |     +--rw classifier* [id]
+     |        +--rw id                          string
+     |        +--rw name?                       string
+     |        +--rw rsp-id-ref?                 -> ../../rsp/id
+     |        +--rw match-attributes* [id]
+     |        |  +--rw id                        string
+     |        |  +--rw ip-proto?                 uint8
+     |        |  +--rw source-ip-address?        inet:ip-address
+     |        |  +--rw destination-ip-address?   inet:ip-address
+     |        |  +--rw source-port?              inet:port-number
+     |        |  +--rw destination-port?         inet:port-number
+     |        +--rw nsd-ref?                    -> /nsd:nsd-catalog/nsd/id
+     |        +--rw nsd-connection-point-ref?   -> /nsd:nsd-catalog/nsd/connection-point/name
+     +--ro nsr-ref-list* [nsr-ref]
+     |  +--ro nsr-ref    -> /osm-project:project/nsr:ns-instance-opdata/nsr/ns-instance-config-ref
+     +--ro vlr-list* [id]
+        +--ro id    yang:uuid

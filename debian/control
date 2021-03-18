@@ -1,0 +1,12 @@
+Source: osm-imdocs
+Section: devel
+Priority: optional
+Maintainer: Michael Marchetti <mmarchetti@sandvine.com>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.6
+Homepage: http://osm.etsi.org
+Package: osm-imdocs
+Architecture: all
+Depends: ${misc:Depends}
+Description: osm-imdocs is the Information Model package for OSM, providing base classes derived from YANG models to be used by other modules.
+
