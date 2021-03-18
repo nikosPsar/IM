@@ -58,7 +58,7 @@ setup(
     name='osm_im',
     description='OSM Information Model',
     long_description=open('README.rst').read(),
-    #version_command=('git describe --tags --long --dirty --match v*', 'pep440-git-full'),
+    version_command=('v8.0.3-0-g03c9aaf-dirty-PAAS'),
     # author='Mike Marchetti',
     # author_email='mmarchetti@sandvine.com',
     packages=find_packages(),
@@ -66,7 +66,7 @@ setup(
     setup_requires=['setuptools-version-command'],
     install_requires=['pyang', 'pyangbind'],
     test_suite='nose.collector',
-    url='https://osm.etsi.org/gitweb/?p=osm/IM.git;a=summary',
+    # url='https://osm.etsi.org/gitweb/?p=osm/IM.git;a=summary',
     license='Apache 2.0',
     cmdclass={'install': Install_osm_im},
 )
